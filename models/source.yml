@@ -1,0 +1,59 @@
+version: 2
+
+sources:
+  - name: dbt_amazon_ads
+    schema: "{{ var('amazon_ads_schema', target.dataset)}}"
+    tables:
+      - name: sb_campaign_report
+        identifier: "{{var('amazon_ads_sb_campaign_report_identifier', 'sb_campaign_report')}}"
+      - name: sb_placement_report
+        identifier: "{{var('amazon_ads_sb_placement_report_identifier', 'sb_placement_report')}}"
+      - name: sb_campaign_history
+        identifier: "{{var('amazon_ads_sb_campign_history_identifier', 'sb_campaign_history')}}"
+      - name: sb_ad_history
+        identifier: "{{var('amazon_ads_sb_ad_history_identifier', 'sb_ad_history')}}"
+      - name: sb_creative_history
+        identifier: "{{var('amazon_ads_sb_creative_history_identifier', 'sb_creative_history')}}"
+      - name: sb_purchased_product
+        identifier: "{{var('amazon_ads_sb_purchased_product_report', 'sb_purchased_product')}}"
+      - name: sb_ad_group_history
+        identifier: "{{var('amazon_ads_sb_ad_group_history', 'sb_ad_group_history')}}"
+      - name: profile
+        identifier: "{{var('amazon_ads_profile', 'profile')}}"
+      - name: sb_brand
+        identifier: "{{var('amazon_ads_sb_brand', 'sb_brand')}}"
+      - name: sb_target_report
+        identifier: "{{var('amazon_ads_sb_target_report', 'sb_target_report')}}"
+      - name: sd_asin_report
+        identifier: "{{var('amazon_ads_sd_asin_report', 'sd_asin_report')}}"
+      - name: sd_campaign_report
+        identifier: "{{var('amazon_ads_sd_campaign_report', 'sd_campaign_report')}}"
+      - name: sd_product_ad_report
+        identifier: "{{var('amazon_ads_sd_product_ad_report', 'sd_product_ad_report')}}"
+      - name: sd_target_report
+        identifier: "{{var('amazon_ads_sd_target_report', 'sd_target_report')}}"
+      - name: sd_ad_group_history
+        identifier: "{{var('amazon_ads_sd_ad_group_history', 'sd_ad_group_history')}}"
+      - name: sd_campaign_history
+        identifier: "{{var('amazon_ads_sd_campaign_history', 'sd_campaign_history')}}"
+      - name: sd_product_ad_history
+        identifier: "{{var('amazon_ads_sd_product_ad_history', 'sd_product_ad_history')}}"
+      - name: product_ad_history
+        identifier: "{{var('amazon_ads_product_ad_history', 'product_ad_history')}}"
+      - name: purchased_product_targeting_report
+        identifier: "{{var('amazon_ads_purchased_product_targeting_report', 'purchased_product_targeting_report')}}"
+      - name: advertised_product_report
+        identifier: "{{var('amazon_ads_advertised_product_report', 'advertised_product_report')}}"
+      - name: targeting_report
+        identifier: "{{var('amazon_ads_targeting_report', 'targeting_report')}}"
+      - name: campaign_level_report
+        identifier: "{{var('amazon_ads_campaign_level_report', 'campaign_level_report')}}"
+      - name: campaign_history
+        identifier: "{{var('amazon_ads_campaign_history', 'campaign_history')}}"
+      - name: ad_group_history
+        identifier: "{{var('amazon_ads_ad_group_history', 'ad_group_history')}}"
+      - name: keyword_history
+        identifier: "{{var('amazon_ads_keyword_history', 'keyword_history')}}"
+
+      - name: portfolio_history
+        identifier: "{{var('amazon_ads_portfolio_history', 'portfolio_history')}}"
