@@ -32,7 +32,7 @@ profile as (
 ),
 fields as (
 	select 
-		campaigns.name as campaignName
+		campaigns.name as campaignName,
 		report.date as date,
 		SAFE_CAST(report.ad_group_id as STRING) as adGroupId,
 	        SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
