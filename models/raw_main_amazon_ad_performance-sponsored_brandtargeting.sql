@@ -37,7 +37,7 @@ fields as (
 		SAFE_CAST(report.ad_group_id as STRING) as adGroupId,
 	        SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
 		SAFE_CAST(report.attributed_sales_14_d as STRING) as attributedSales14d,
-		report.campaing_id as campaignId,
+		report.campaign_id as campaignId,
 		SAFE_CAST(report.clicks as STRING) as clicks,
 		SAFE_CAST(report.cost as STRING) as cost,
 		SAFE_CAST(report.currency as STRING) as currency,
