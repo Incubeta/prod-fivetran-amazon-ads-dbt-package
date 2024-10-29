@@ -51,7 +51,7 @@ fields as (
 		SAFE_CAST(report.attributed_sales_14_d_same_sku as STRING) as attributedSales14dSameSKU,
 		SAFE_CAST(campaigns.serving_status as STRING) as campignStatus,
 		SAFE_CAST(campaigns.cost_type as STRING) as campaignType,
-		SAFE_CAST(report.search_term_impression_share as STRING) as searchTermImpressionShare,
+		SAFE_CAST(report.search_term_impression_rank as STRING) as searchTermImpressionRank,
 		SAFE_CAST(report.top_of_search_impression_share as STRING) as topOfSearchImpressionShare,
 		SAFE_CAST(report.search_term_impression_share as STRING) as searchTermImpressionShare,
 		SAFE_CAST(campaigns.budget_type as STRING) as budgetType
