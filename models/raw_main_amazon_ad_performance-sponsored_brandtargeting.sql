@@ -16,7 +16,7 @@ with report as (
 	select *
 	from {{ source('dbt_amazon_ads', 'sb_keyword_report') }}
 ),
-with keyword as (
+keyword as (
 	select * 
 	from {{ source('dbt_amazon_ads', 'sb_keyword')}}
 ),
