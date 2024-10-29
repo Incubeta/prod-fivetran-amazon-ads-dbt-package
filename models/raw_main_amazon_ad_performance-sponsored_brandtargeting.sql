@@ -14,7 +14,11 @@ config(
 
 with report as (
 	select *
-	from {{ source('dbt_amazon_ads', 'sb_target_report') }}
+	from {{ source('dbt_amazon_ads', 'sb_keyword_report') }}
+),
+with keyword as (
+	select * 
+	from {{ source('dbt_amazon_ads', 'sb_keyword')}}
 ),
 
 campaigns as (
@@ -28,29 +32,29 @@ profile as (
 ),
 fields as (
 	select 
-		report.currency as campaignBudgetCurrencyCode,
-		report.keyword_text as keywordText,
-		report.campaign_status as campaignStatus,
-		SAFE_CAST(report.attributed_conversions_14_d_same_sku as STRING) as attributedConversions14dSameSKU,
-		report.ad_group_id as adGroupId,
-		report.search_term_impression_rank as searchTermImpressionRank,
-		SAFE_CAST(report.top_of_search_impression_share as STRING) as topOfSearchImpressionShare, 
-		report.campaign_type as campaignType,
-		report.search_term_impression_share as search_term_impression_share,
-		SAFE_CAST(report.impressions as STRING) as impressions,
-		adgroups.name as adGroupName,
-		SAFE_CAST(report.cost as STRING) as cost,
-		profile.country_code as profileCountryCode,
-		report.match_type as matchType,
-		SAFE_CAST(report.attributed_sales_14_d_same_sku as STRING) attributedSales14dSameSKU,
-		SAFE_CAST(report.attributed_sales_14_d as STRING) attributedSales14d,
-		SAFE_CAST(report.clicks as STRING) as clicks,
-		SAFE_CAST(report.units_sold_14_d as STRING) unitsSold14d,
-		report.campaign_budget_type as campaignBudgetType,
+		campaigns.name as campaignName
 		report.date as date,
-		SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
-		report.campaign_id as campaignId,
-		profile.account_name as profileBrandName, -- is this the correct brand name?
+		SAFE_CAST(report.ad_group_id as STRING) as adGroupId,
+	        SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
+		SAFE_CAST(report.attributed_sales_14_d as STRING) as attributedSales14d,
+		report.campaing_id as campaignId
+		SAFE_CAST(report.clicks as STRING) as clicks,
+		SAFE_CAST(report.cost as STRING) as cost,
+		SAFE_CAST(report.currency as STRING) as currency,
+		SAFE_CAST(report.impressions as STRING) as impressions,
+		SAFE_CAST(profile.country_code as STRING) as profileCountryCode,
+		SAFE_CAST(profile.account_name as STRING) as profileBrandName,
+		SAFE_CAST(adgroup.name as STRING) as adGroupName,
+		SAFE_CAST(keyword.keyword_text as STRING) as keywordText,
+		SAFE_CAST(keyword.match_type as STRING) as matchType,
+		SAFE_CAST(report.attributed_conversions_14_d_same_sku as STRING) as attributedConversions14dSameSKU,
+		SAFE_CAST(report.attributed_sales_14_d_same_sku as STRING) as attributedSales14dSameSKU,
+		SAFE_CAST(campaigns.serving_status as STRING) as campignStatus,
+		SAFE_CAST(campaigns.cost_type as STRING) as campaignType,
+		SAFE_CAST(report.search_term_impression_share as STRING) as searchTermImpressionShare,
+		SAFE_CAST(report.top_of_search_impression_share as STRING) as topOfSearchImpressionShare,
+		SAFE_CAST(report.search_term_impression_share as STRING) as searchTermImpressionShare,
+		SAFE_CAST(campaigns.budget_type as STRING) as budgetType
 
 
 		from report
@@ -60,6 +64,8 @@ fields as (
 			on adgroups.id = report.ad_group_id
 		left join profile
 			on profile.id = campaigns.profile_id
+		left join keyword
+			on report.keyword_id = keyword.id
 
 
 
