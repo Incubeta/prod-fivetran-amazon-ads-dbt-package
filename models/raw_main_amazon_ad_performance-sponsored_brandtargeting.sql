@@ -28,7 +28,7 @@ profile as (
 ),
 fields as (
 	select 
-		report.campaign_budget_currency_code as campaignBudgetCurrencyCode,
+		report.currency as campaignBudgetCurrencyCode,
 		report.keyword_text as keywordText,
 		report.campaign_status as campaignStatus,
 		SAFE_CAST(report.attributed_conversions_14_d_same_sku as STRING) as attributedConversions14dSameSKU,
