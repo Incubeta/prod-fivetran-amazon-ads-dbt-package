@@ -12,8 +12,8 @@ sources:
         identifier: "{{var('amazon_ads_sb_keyword_report_identifier', 'sb_keyword_report')}}"
       - name: sb_campaign_history
         identifier: "{{var('amazon_ads_sb_campign_history_identifier', 'sb_campaign_history')}}"
-      - name: sb_keyword_history
-        identifier: "{{var('amazon_ads_sb_keyword_history_identifier', 'sb_keyword_history')}}"
+      - name: sb_keyword
+        identifier: "{{var('amazon_ads_sb_keyword_identifier', 'sb_keyword')}}"
       - name: sb_ad_history
         identifier: "{{var('amazon_ads_sb_ad_history_identifier', 'sb_ad_history')}}"
       - name: sb_creative_history
