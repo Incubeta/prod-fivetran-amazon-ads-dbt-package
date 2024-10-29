@@ -44,7 +44,7 @@ fields as (
 		SAFE_CAST(report.impressions as STRING) as impressions,
 		SAFE_CAST(profile.country_code as STRING) as profileCountryCode,
 		SAFE_CAST(profile.account_name as STRING) as profileBrandName,
-		SAFE_CAST(adgroup.name as STRING) as adGroupName,
+		SAFE_CAST(adgroups.name as STRING) as adGroupName,
 		SAFE_CAST(keyword.keyword_text as STRING) as keywordText,
 		SAFE_CAST(keyword.match_type as STRING) as matchType,
 		SAFE_CAST(report.attributed_conversions_14_d_same_sku as STRING) as attributedConversions14dSameSKU,
