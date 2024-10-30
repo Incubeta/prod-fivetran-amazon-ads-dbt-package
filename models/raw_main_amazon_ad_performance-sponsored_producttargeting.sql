@@ -85,7 +85,7 @@ fields as (
 		left join adgroup
 			on report.ad_group_id = SAFE_CAST(adgroup.id as INT64) and adgroup.is_most_recent_record
 		left join keyword_history
-			on keyword_history.id = report.keyword_id and keyword_history.is_most_recent_record
+			on SAFE_CAST(keyword_history.id as INT64) = report.keyword_id and keyword_history.is_most_recent_record
 
 
 
