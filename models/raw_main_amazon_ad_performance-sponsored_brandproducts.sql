@@ -43,7 +43,7 @@ fields as (
 		profile.currency_code as profileCurrencyCode,
 		report.purchased_asin as purchasedAsin,
 		report.campaign_budget_currency_code as campaignBudgetCurrencyCode,
-		campaigns.profile_id as profileId,
+		SAFE_CAST(campaigns.profile_id as STRING) as profileId,
 		SAFE_CAST(profile.country_code as STRING) as profileCountryCode,
 		SAFE_CAST(report.units_sold_14_d as STRING) unitsSold14d,
 		SAFE_CAST(report.orders_14_d as STRING) orders14d,
