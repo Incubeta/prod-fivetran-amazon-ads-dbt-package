@@ -18,13 +18,13 @@ with report as (
 ),
 
 campaign as (
-	select * from {{ source('dbt_amazon_ads', 'campaign_history')}}
+	select id,name,profile_id,targeting_type, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'campaign_history')}}
 ),
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
 ),
 adgroup as (
-	select * from {{ source('dbt_amazon_ads', 'ad_group_history')}}
+	select id,name,row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'ad_group_history')}}
 ),
 fields as (
 	select 
@@ -71,14 +71,15 @@ fields as (
     SAFE_CAST( report.units_sold_clicks_1_d AS STRING ) unitsSoldClicks1d,
     SAFE_CAST( report.sales_other_sku_7_d AS STRING ) salesOtherSku7d,
     SAFE_CAST( report.campaign_budget_type AS STRING ) campaignType,
+SAFE_CAT( campaign.targeting_type as STRING) keywordType
 
 		from report
 		left join campaign
-			on SAFE_CAST(campaign.id as INT64) = report.campaign_id
+			on SAFE_CAST(campaign.id as INT64) = report.campaign_id and campaign.is_most_recent_record
 		left join profile
 			on profile.id = SAFE_CAST(campaign.profile_id as INT64)
 		left join adgroup
-			on report.ad_group_id = SAFE_CAST(adgroup.id as INT64)
+			on report.ad_group_id = SAFE_CAST(adgroup.id as INT64) and adgroup.is_most_recent_record
 
 
 

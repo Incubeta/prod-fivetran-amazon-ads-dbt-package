@@ -18,7 +18,7 @@ with report as (
 ),
 
 campaigns as (
-	select * from {{ source('dbt_amazon_ads', 'sd_campaign_history')}}
+	select id,name,tactic,profile_id, row_number() over (partition by id order by last_updated_date desc) = 1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sd_campaign_history')}}
 ),
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
@@ -86,7 +86,7 @@ fields as (
 
 		from report
 		left join campaigns
-			on campaigns.id = report.campaign_id
+			on campaigns.id = report.campaign_id and campaigns.tactic = report.tactic and campaigns.is_most_recent_record
 		left join profile
 			on profile.id = campaigns.profile_id
 		left join portfolio

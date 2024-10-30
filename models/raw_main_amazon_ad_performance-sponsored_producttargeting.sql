@@ -15,18 +15,17 @@ config(
 with report as (
 	select *
 	from {{ source('dbt_amazon_ads', 'targeting_report') }}
+	union all
+	select * from {{ source('dbt_amazon_ads', 'targeting_keyword_report')}}
 ),
 campaign as (
-	select * from {{ source('dbt_amazon_ads', 'campaign_history')}}
+	select id,profile_id,name,row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'campaign_history')}}
 ),
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
 ),
 adgroup as (
-	select * from {{ source('dbt_amazon_ads', 'ad_group_history')}}
-),
-keyword as (
-	select * from {{ source('dbt_amazon_ads', 'keyword_history')}}
+	select id,name, row_number() over(partition by id order by last_updated_ddate desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'ad_group_history')}}
 ),
 fields as (
 	select 
@@ -75,13 +74,11 @@ fields as (
 
 		from report
 		left join campaign
-			on SAFE_CAST(campaign.id as INT64) = report.campaign_id
+			on SAFE_CAST(campaign.id as INT64) = report.campaign_id and campaign.is_most_recent_record
 		left join profile
 			on profile.id = campaign.profile_id
 		left join adgroup
-			on report.ad_group_id = SAFE_CAST(adgroup.id as INT64)
-		left join keyword
-			on report.keyword_id = SAFE_CAST(keyword.id as INT64)
+			on report.ad_group_id = SAFE_CAST(adgroup.id as INT64) and adgroup.is_most_recent_record
 
 
 

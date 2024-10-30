@@ -50,6 +50,8 @@ sources:
         identifier: "{{var('amazon_ads_advertised_product_report', 'advertised_product_report')}}"
       - name: targeting_report
         identifier: "{{var('amazon_ads_targeting_report', 'targeting_report')}}"
+      - name: targeting_keyword_report
+        identifier: "{{var('amazon_ads_targeting_keyword_report', 'targeting_keyword_report')}}"
       - name: campaign_level_report
         identifier: "{{var('amazon_ads_campaign_level_report', 'campaign_level_report')}}"
       - name: campaign_history

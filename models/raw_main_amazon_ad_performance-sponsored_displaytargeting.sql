@@ -18,13 +18,13 @@ with report as (
 ),
 
 campaign as (
-	select * from {{ source('dbt_amazon_ads', 'sd_campaign_history')}}
+	select id,name,profile_id, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sd_campaign_history')}}
 ),
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
 ),
 adgroup as (
-	select * from {{ source('dbt_amazon_ads', 'sd_ad_group_history')}}
+	select id,name,row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sd_ad_group_history')}}
 ),
 fields as (
 	select 
@@ -71,14 +71,25 @@ fields as (
     SAFE_CAST( report.attributed_conversions_14_d AS STRING ) attributedConversions14d,
     SAFE_CAST( report.attributed_conversions_30_d_same_sku AS STRING ) attributedConversions30dSameSku,
     SAFE_CAST( report.attributed_conversions_30_d AS STRING ) attributedConversions30d,
+SAFE_CAST(report.purchases_promoted_clicks as STRING) purchasesPromotedClicks,
+SAFE_CAST(report.impressions_views as STRING) impressionsViews,
+SAFE_CAST(report.sales_clicks as STRING) salesClicks,
+SAFE_CAST(report.purchases_clicks as STRING) purchasesClicks,
+SAFE_CAST(report.new_to_brand_sales_clicks as STRING) newToBrandSalesClicks,
+SAFE_CAST(report.campaign_budget_currency_code as STRING) campaignBudgetCurrencyCode,
+SAFE_CAST(report.sales_promoted_clicks as STRING) salesPromotedClicks,
+SAFE_CAST(report.new_to_brand_purchases_clicks as STRING) newToBrandPurchasesClicks,
+SAFE_CAST(report.new_to_brand_units_sold_clicks as STRING) newToBrandUnitsSoldClicks
+
+
 
 		from report
 		left join campaign
-			on campaign.id = report.campaign_id
+			on campaign.id = report.campaign_id and campaign.is_most_recent_record
 		left join profile
 			on profile.id = SAFE_CAST(campaign.profile_id as INT64)
 		left join adgroup
-			on report.ad_group_id = report.ad_group_id
+			on report.ad_group_id = adgroup.id and adgroup.is_most_recent_record
 
 
 

@@ -44,6 +44,7 @@ fields as (
 		campaigns.profile_id as profileId,
 		SAFE_CAST(report.units_sold_14_d as STRING) unitsSold14d,
 		SAFE_CAST(report.orders_14_d as STRING) orders14d,
+		SAFE_CAST(report.new_to_brand_units_sold_14_d as STRING) newToBrandUnitsSold14d,
 		report.date as date,
 
 		from report
