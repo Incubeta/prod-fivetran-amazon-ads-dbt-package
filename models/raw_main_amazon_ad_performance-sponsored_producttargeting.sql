@@ -29,6 +29,9 @@ profile as (
 adgroup as (
 	select id,name, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'ad_group_history')}}
 ),
+keyword_history as (
+	select id, keyword_text, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'keyword_history')}}
+),
 fields as (
 	select 
     SAFE_CAST( report.targeting AS STRING ) targeting,
@@ -67,7 +70,7 @@ fields as (
     SAFE_CAST( report.cost AS STRING ) cost,
     SAFE_CAST( report.purchases_same_sku_1_d AS STRING ) purchasesSameSku1d,
     SAFE_CAST( report.purchases_30_d AS STRING ) purchases30d,
-    SAFE_CAST( keyword.keyword_text AS STRING ) keyword,
+    SAFE_CAST( keyword_history.keyword_text AS STRING ) as keyword,
     SAFE_CAST( report.attributed_sales_same_sku_14_d AS STRING ) attributedSalesSameSku14d,
     SAFE_CAST( report.date AS DATE ) date,
     SAFE_CAST( report.units_sold_same_sku_30_d AS STRING ) unitsSoldSameSku30d,
@@ -81,6 +84,8 @@ fields as (
 			on profile.id = campaign.profile_id
 		left join adgroup
 			on report.ad_group_id = SAFE_CAST(adgroup.id as INT64) and adgroup.is_most_recent_record
+		left join keyword_history
+			on keyword_history.id = report.keyword_id and keyword_history.is_most_recent_record
 
 
 
