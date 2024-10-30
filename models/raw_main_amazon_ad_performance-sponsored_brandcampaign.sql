@@ -6,7 +6,9 @@ config(
       "field": "date",
       "data_type": "date",
       "granularity": "day"
-    }
+    },
+	materialized='incremental',
+	incremental_strategy='insert_overwrite'
   )
 
 }}
