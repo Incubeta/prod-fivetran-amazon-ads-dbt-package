@@ -25,11 +25,8 @@ campaigns as (
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
 ),
-portfolio as (
-	select * from {{ source('dbt_amazon_ads', 'portfolio_history')}}
-),
 product_ad_history as (
-	select * from {{ source('dbt_amazon_ads', 'sd_product_ad_history')}}
+	select id, asin, campaign_id, ad_group_id, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record  from {{ source('dbt_amazon_ads', 'sd_product_ad_history')}}
 ),
 fields as (
 	select 
@@ -91,10 +88,8 @@ fields as (
 			on campaigns.id = report.campaign_id and campaigns.tactic = report.tactic and campaigns.is_most_recent_record
 		left join profile
 			on profile.id = campaigns.profile_id
-		left join portfolio
-			on SAFE_CAST(campaigns.portfolio_id as INT64) = portfolio.id
 		left join product_ad_history
-			on product_ad_history.campaign_id = report.campaign_id and product_ad_history.ad_group_id = report.ad_group_id
+			on product_ad_history.campaign_id = report.campaign_id and product_ad_history.ad_group_id = report.ad_group_id and product_ad_history.is_most_recent_record
 
 
 

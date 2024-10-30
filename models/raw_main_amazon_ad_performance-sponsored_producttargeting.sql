@@ -27,7 +27,7 @@ profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
 ),
 adgroup as (
-	select id,name, row_number() over(partition by id order by last_updated_ddate desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'ad_group_history')}}
+	select id,name, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'ad_group_history')}}
 ),
 fields as (
 	select 

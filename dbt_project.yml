@@ -3,7 +3,7 @@
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
 name: 'dbt_amazon_ads'
-version: '1.1.1'
+version: '1.1.2'
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_amazon_ads'
