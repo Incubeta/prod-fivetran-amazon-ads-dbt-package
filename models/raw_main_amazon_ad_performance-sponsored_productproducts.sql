@@ -72,7 +72,7 @@ fields as (
     SAFE_CAST( report.units_sold_same_sku_30_d AS STRING ) unitsSoldSameSku30d,
     SAFE_CAST( report.units_sold_clicks_1_d AS STRING ) unitsSoldClicks1d,
     SAFE_CAST( report.sales_other_sku_7_d AS STRING ) salesOtherSku7d,
-    SAFE_CAST( report.campaign_budget_type AS STRING ) campaignType,
+    'sponsoredProducts' as campaignType, -- seems to be always the same value in adverity, but is not found in fivetran
 SAFE_CAST( campaign.targeting_type as STRING) keywordType
 
 		from report
