@@ -30,7 +30,7 @@ product_ad_history as (
 ),
 fields as (
 	select 
-	report.report_date as date,
+	COALESCE(report.report_date, report.date) as date,
     SAFE_CAST( report.campaign_id AS STRING ) campaignId,
     SAFE_CAST( campaigns.name AS STRING ) campaignName,
     SAFE_CAST( report.ad_id AS STRING ) adId,
