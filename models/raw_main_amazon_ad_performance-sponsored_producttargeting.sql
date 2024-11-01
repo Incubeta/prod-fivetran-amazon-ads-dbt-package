@@ -60,7 +60,7 @@ fields as (
     SAFE_CAST( report.sales_1_d AS STRING ) sales1d,
     SAFE_CAST( report.campaign_budget_currency_code  AS STRING ) currency,
     SAFE_CAST( report.units_sold_clicks_30_d AS STRING ) unitsSoldClicks30d,
-    SAFE_CAST( report.keyword_type AS STRING ) keyword_type,
+    SAFE_CAST( report.keyword_type AS STRING ) keywordType,
     SAFE_CAST( report.units_sold_clicks_14_d AS STRING ) unitsSoldClicks14d,
     SAFE_CAST( report.purchases_7_d AS STRING ) purchases7d,
     SAFE_CAST( report.attributed_sales_same_sku_1_d AS STRING ) attributedSalesSameSku1d,

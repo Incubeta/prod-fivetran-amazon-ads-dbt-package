@@ -35,7 +35,7 @@ fields as (
     SAFE_CAST( report.sales_7_d AS STRING ) sales7d,
     SAFE_CAST( report.purchases_same_sku_7_d AS STRING ) purchasesSameSku7d,
     SAFE_CAST( report.attributed_sales_same_sku_30_d AS STRING ) attributedSalesSameSku30d,
-    SAFE_CAST( report.spend AS FLOAT64 ) spend,
+    SAFE_CAST( report.spend AS STRING ) spend,
     SAFE_CAST( report.units_sold_other_sku_7_d AS STRING ) unitsSoldOtherSku7d,
     SAFE_CAST( campaign.name AS STRING ) campaignName,
     SAFE_CAST( report.ad_id AS STRING ) adId,
