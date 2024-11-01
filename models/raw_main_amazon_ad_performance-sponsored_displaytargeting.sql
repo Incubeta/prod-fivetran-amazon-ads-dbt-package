@@ -69,7 +69,7 @@ fields as (
     SAFE_CAST( adgroup.name AS STRING ) adGroupName,
     SAFE_CAST( report.cost AS STRING ) cost,
     SAFE_CAST( report.attributed_sales_7_d AS STRING ) attributedSales7d,
-    SAFE_CAST( report.report_date AS DATE ) date,
+    SAFE_CAST( COALESCE(report.report_date, report.date) AS DATE ) date,
     SAFE_CAST( report.attributed_conversions_14_d AS STRING ) attributedConversions14d,
     SAFE_CAST( report.attributed_conversions_30_d_same_sku AS STRING ) attributedConversions30dSameSku,
     SAFE_CAST( report.attributed_conversions_30_d AS STRING ) attributedConversions30d,
