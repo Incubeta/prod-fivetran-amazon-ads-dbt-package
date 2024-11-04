@@ -13,6 +13,8 @@ config(
 
 }}
 
+{%- set report_columns = dbt_utils.get_filtered_columns_in_relation(from=source('dbt_amazon_ads', 'sd_product_ad_report')) -%}
+
 
 with report as (
 	select *
@@ -30,7 +32,11 @@ product_ad_history as (
 ),
 fields as (
 	select 
+	{% if 'report_date' in report_columns}
 	COALESCE(report.report_date, report.date) as date,
+	{% else %}
+	report.date as date,
+	{% endif %}
     SAFE_CAST( report.campaign_id AS STRING ) campaignId,
     SAFE_CAST( campaigns.name AS STRING ) campaignName,
     SAFE_CAST( report.ad_id AS STRING ) adId,
