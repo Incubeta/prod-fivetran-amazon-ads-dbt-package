@@ -50,7 +50,6 @@ fields as (
     SAFE_CAST( report.video_unmutes AS STRING ) videoUnmutes,
     SAFE_CAST( report.video_third_quartile_views AS STRING ) videoThirdQuartileViews,
     SAFE_CAST( report.video_midpoint_views AS STRING ) videoMidpointViews,
-    SAFE_CAST( report.view_impressions AS STRING ) viewImpressions,
     SAFE_CAST( report.video_first_quartile_views AS STRING ) videoFirstQuartileViews,
     SAFE_CAST( report.impressions AS STRING ) impressions,
     SAFE_CAST( report.clicks AS STRING ) clicks,
