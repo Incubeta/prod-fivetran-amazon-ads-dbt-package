@@ -24,10 +24,10 @@ keyword as (
 ),
 
 campaigns as (
-	select * from {{ source('dbt_amazon_ads', 'sb_campaign_history')}}
+	select id,name,profile_id,serving_status,cost_type,budget_type,row_number() over(partition by id order by last_update_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sb_campaign_history')}}
 ),
 adgroups as (
-	select * from {{ source('dbt_amazon_ads', 'sb_ad_group_history')}}
+	select id, name, row_number() over(partition by id order by last_update_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sb_ad_group_history')}}
 ),
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
@@ -62,9 +62,9 @@ fields as (
 
 		from report
 		left join campaigns
-			on campaigns.id = report.campaign_id
+			on campaigns.id = report.campaign_id and campaigns.is_most_recent_record
 		left join adgroups
-			on adgroups.id = report.ad_group_id
+			on adgroups.id = report.ad_group_id and adgroups.is_most_recent_record
 		left join profile
 			on profile.id = campaigns.profile_id
 		left join keyword
