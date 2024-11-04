@@ -32,7 +32,7 @@ product_ad_history as (
 ),
 fields as (
 	select 
-	{% if 'report_date' in report_columns}
+	{% if 'report_date' in report_columns%}
 	COALESCE(report.report_date, report.date) as date,
 	{% else %}
 	report.date as date,
