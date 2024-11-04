@@ -43,7 +43,6 @@ fields as (
     SAFE_CAST( campaign.id AS STRING ) campaignId,
     SAFE_CAST( profile.account_name AS STRING ) profileBrandName,
     SAFE_CAST( report.video_first_quartile_views AS STRING ) videoFirstQuartileViews,
-    SAFE_CAST( report.targeting_type AS STRING ) targetingType,
     SAFE_CAST( report.impressions AS STRING ) impressions,
     SAFE_CAST( adgroup.name AS STRING ) adGroupName,
     SAFE_CAST( report.cost AS STRING ) cost,
