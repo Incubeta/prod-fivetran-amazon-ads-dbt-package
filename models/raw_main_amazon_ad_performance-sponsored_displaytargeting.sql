@@ -75,6 +75,7 @@ SAFE_CAST(report.new_to_brand_units_sold_clicks as STRING) newToBrandUnitsSoldCl
 	SAFE_CAST(null as STRING) as attributedSales7dSameSKU,
 	SAFE_CAST(null as STRING) as attributedSalesNewToBrand14d,
 	SAFE_CAST(null as STRING) as attributedUnitsOrdered1d,
+	SAFE_CAST(null as STRING) as attributedUnitsOrdered14d,
 	SAFE_CAST(null as STRING) as attributedUnitsOrdered30d,
 	SAFE_CAST(null as STRING) as attributedUnitsOrdered7d,
 	SAFE_CAST(null as STRING) as attributedUnitsOrderedNewToBrand14d,
