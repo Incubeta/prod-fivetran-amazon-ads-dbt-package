@@ -20,15 +20,11 @@ with report as (
 ),
 
 campaigns as (
-	select * from {{ source('dbt_amazon_ads', 'sb_campaign_history')}}
+	select id,name,state, row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sb_campaign_history')}}
 ),
-ads as (
-	select * from {{ source('dbt_amazon_ads','sb_ad_history')}}
-),
-creative as (
-	select * from {{ source('dbt_amazon_ads','sb_creative_history')}}
-),
-
+profile as (
+	select * from {{ source('dbt_amazon_ads', 'profile')}}
+)
 
 fields as (
 	select 
@@ -42,17 +38,17 @@ fields as (
 		SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
 		campaigns.id as campaignId,
 		campaigns.profile_id as profileId,
-		creative.brand_name as profileBrandName, -- is this the correct brand name?
+		profile.account_name as profileBrandName, -- is this the correct brand name?
 		report.report_date as date,
-		SAFE_CAST(report.cost as STRING) as cost
+		SAFE_CAST(report.cost as STRING) as cost,
+		SAFE_CAST(profile.country_code as STRING) as profileCountryCode
+
 
 		from report
 		left join campaigns
-			on campaigns.id = report.campaign_id
-		left join ads
-			on ads.campaign_id = campaigns.id
-		left join creative
-			on creative.ad_id = ads.id
+			on campaigns.id = report.campaign_id and campaigns.is_most_recent_record
+		left join profile
+			on campaigns.profile_id = profile.id
 
 
 
