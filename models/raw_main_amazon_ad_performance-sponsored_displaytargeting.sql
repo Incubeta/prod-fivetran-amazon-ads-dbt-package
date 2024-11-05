@@ -81,7 +81,7 @@ SAFE_CAST(report.new_to_brand_units_sold_clicks as STRING) newToBrandUnitsSoldCl
 	SAFE_CAST(null as STRING) as attributedUnitsOrderedNewToBrand14d,
 	SAFE_CAST(null as STRING) as currency,
 	SAFE_CAST(null as STRING) as viewImpressions,
-	SAFE_CAST(null as STRING) as targetingText,
+	"TARGETING_EXPRESSION" as targetingType
 
 
 
