@@ -62,6 +62,32 @@ fields as (
     SAFE_CAST( report.purchases_promoted_clicks AS STRING ) purchasesPromotedClicks,
     SAFE_CAST( report.impressions_views AS STRING ) impressionsViews,
     SAFE_CAST( report.purchases_clicks AS STRING ) purchasesClicks,
+	null as attributedConversions14d,
+	null as attributedConversions14dSameSKU,
+	null as attributedConversions1d,
+	null as attributedConversions1dSameSKU,
+	null as attributedConversions30d,
+	null as attributedConversions30dSameSKU,
+	null as attributedConversions7d,
+	null as attributedConversions7dSameSKU,
+	null as attributedOrdersNewToBrand14d,
+	null as attributedSales14d,
+	null as attributedSales14dSameSKU,
+	null as attributedSales1d,
+	null as attributedSales1dSameSKU,
+	null as attributedSales30d,
+	null as attributedSales30dSameSKU,
+	null as attributedSales7d,
+	null as attributedSales7dSameSKU,
+	null as attributedSalesNewToBrand14d,
+	null as attributedUnitsOrdered1d,
+	null as attributedUnitsOrdered30d,
+	null as attributedUnitsOrdered7d,
+	null as attributedUnitsOrderedNewToBrand14d,
+	null as currency,
+	null as viewImpressions
+
+
 
 
 		from report
