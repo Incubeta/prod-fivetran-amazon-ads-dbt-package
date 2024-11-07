@@ -20,7 +20,7 @@ with report as (
 ),
 
 campaigns as (
-	select id, name, state, profile_id,row_number() over(partition by id order by last_update_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sd_campaign_history')}}
+	select id, name, state, profile_id,row_number() over(partition by id order by last_updated_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sd_campaign_history')}}
 ),
 profile as (
 	select * from {{ source('dbt_amazon_ads', 'profile')}}
