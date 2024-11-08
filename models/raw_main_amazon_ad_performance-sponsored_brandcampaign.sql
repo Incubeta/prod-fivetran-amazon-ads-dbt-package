@@ -36,8 +36,8 @@ fields as (
 		campaigns.state as campaignStatus,
 		SAFE_CAST(report.attributed_sales_14_d as STRING) as attributedSales14d,
 		SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
-		campaigns.id as campaignId,
-		campaigns.profile_id as profileId,
+		SAFE_CAST(campaigns.id as STRING) as campaignId,
+		SAFE_CAST(campaigns.profile_id  as STRING) as profileId,
 		profile.account_name as profileBrandName, -- is this the correct brand name?
 		report.report_date as date,
 		SAFE_CAST(report.cost as STRING) as cost,
