@@ -37,7 +37,7 @@ fields as (
                 SAFE_CAST(profile.id AS STRING) profileId,
                 SAFE_CAST(profile.account_name as STRING) profileBrandName,
                 SAFE_CAST(campaign.id  AS      STRING) campaignId,
-                SAFE_CAST(report.purchases_14_d) purchases14d,
+                SAFE_CAST(report.purchases_14_d as STRING) purchases14d,
                 SAFE_CAST(report.date    AS      DATE)   date,
                 SAFE_CAST(report.cost AS STRING) cost,
                 SAFE_CAST(report.sales_14_d as STRING) sales14d,
