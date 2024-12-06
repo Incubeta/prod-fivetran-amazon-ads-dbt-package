@@ -44,7 +44,7 @@ fields as (
                 SAFE_CAST(campaigns.state AS    STRING) campaignStatus,
                 SAFE_CAST(report.campaign_budget_currency_code AS STRING) campaignBudgetCurrencyCode,
                 SAFE_CAST(report.purchases_clicks AS STRING) purchasesClicks,
-                SAFE_CAST(report.sales_clicks AS STRING) salesClicks
+                SAFE_CAST(report.sales_clicks AS STRING) salesClicks,
                 SAFE_CAST(null as STRING) attributedSales14d,
                 SAFE_CAST(null AS STRING) attributedConversions14d,
                 SAFE_CAST(null as STRING) attributedUnitsSold14d,
