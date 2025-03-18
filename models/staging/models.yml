@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: stg_sb_campaign_report
+    event_time: day

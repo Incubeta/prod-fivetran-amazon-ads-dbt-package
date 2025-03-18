@@ -1,0 +1,4 @@
+version: 2
+models:
+  - name: int_amazon_ad_performance-sponsored_brandcampaign
+    event_time: day

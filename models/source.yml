@@ -3,6 +3,7 @@ version: 2
 sources:
   - name: dbt_amazon_ads
     schema: "{{ var('amazon_ads_schema', target.dataset)}}"
+    database: "{{var('amazon_ads_database', target.database)}}"
     tables:
       - name: sb_campaign_report
         identifier: "{{var('amazon_ads_sb_campaign_report_identifier', 'sb_campaign_report')}}"
