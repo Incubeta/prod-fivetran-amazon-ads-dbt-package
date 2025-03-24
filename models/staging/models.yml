@@ -1,4 +1,23 @@
 version: 2
 models:
   - name: stg_sb_campaign_report
-    event_time: day
+    config:
+      event_time: day
+  - name: stg_sd_campaign_report
+    config:
+      event_time: day
+  - name: stg_sb_purchased_report
+    config:
+      event_time: day
+  - name: stg_sb_keyword_report
+    config:
+      event_time: day
+  - name: stg_sd_product_ad_report
+    config:
+      event_time: day
+  - name: stg_advertised_product_report
+    config:
+      event_time: day
+  - name: stg_targeting_report
+    config:
+      event_time: day
