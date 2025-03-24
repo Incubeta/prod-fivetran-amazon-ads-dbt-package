@@ -1,0 +1,20 @@
+version: 2
+models:
+  - name: int_amazon_ad_performance-sponsored_brandcampaign
+    config:
+      event_time: day
+  - name: int_amazon_ad_performance-sponsored_brandproducts
+    config:
+      event_time: day
+  - name: int_amazon_ad_performance-sponsored_brandtargeting
+    config:
+      event_time: day
+  - name: int_amazon_ad_performance-sponsored_displaycampaign
+    config:
+      event_time: day
+  - name: int_amazon_ad_performance-sponsored_productproducts
+    config:
+      event_time: day
+  - name: int_amazon_ad_performance-sponsored_producttargeting
+    config:
+      event_time: day

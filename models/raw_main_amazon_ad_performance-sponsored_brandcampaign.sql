@@ -1,4 +1,4 @@
-{{ config(enabled=var('amazon_ads__brandcampaigns_enabled', True))}}
+{{ config(enabled=var('amazon_ads__brandcampaigns_enabled', True)) }}
 {{
 config(
 	alias=var('amazon_ads__sponsored_brandcampaign_alias','amazon-ad_performance-sponsored_brandcampaign-v1' ),
@@ -15,40 +15,52 @@ config(
 
 
 with report as (
-	select *
-	from {{ source('dbt_amazon_ads', 'sb_campaign_report') }}
+    select *
+    from {{ source('dbt_amazon_ads', 'sb_campaign_report') }}
 ),
 
 campaigns as (
-	select id,name,state,profile_id, row_number() over(partition by id order by last_update_date desc)=1 as is_most_recent_record from {{ source('dbt_amazon_ads', 'sb_campaign_history')}}
+    select
+        id,
+        name,
+        state,
+        profile_id,
+        row_number() over (
+            partition by id
+            order by last_update_date desc
+        ) = 1 as is_most_recent_record
+    from {{ source('dbt_amazon_ads', 'sb_campaign_history') }}
 ),
+
 profile as (
-	select * from {{ source('dbt_amazon_ads', 'profile')}}
+    select * from {{ source('dbt_amazon_ads', 'profile') }}
 ),
 
 fields as (
-	select 
-		campaigns.name as campaignName,
-		SAFE_CAST( report.units_sold_14_d as STRING) as unitsSold14d,
-		SAFE_CAST(report.impressions as STRING) as impressions,
-		SAFE_CAST(report.clicks as STRING) as clicks,
-		SAFE_CAST(report.currency as STRING) as currency,
-		campaigns.state as campaignStatus,
-		SAFE_CAST(report.attributed_sales_14_d as STRING) as attributedSales14d,
-		SAFE_CAST(report.attributed_conversions_14_d as STRING) as attributedConversions14d,
-		SAFE_CAST(campaigns.id as STRING) as campaignId,
-		SAFE_CAST(campaigns.profile_id  as STRING) as profileId,
-		profile.account_name as profileBrandName, -- is this the correct brand name?
-		report.report_date as date,
-		SAFE_CAST(report.cost as STRING) as cost,
-		SAFE_CAST(profile.country_code as STRING) as profileCountryCode
+    select
+        campaigns.name as campaignname,
+        campaigns.state as campaignstatus,
+        profile.account_name as profilebrandname,
+        report.report_date as date,
+        safe_cast(report.units_sold_14_d as STRING) as unitssold14d,
+        safe_cast(report.impressions as STRING) as impressions,
+        safe_cast(report.clicks as STRING) as clicks,
+        safe_cast(report.currency as STRING) as currency,
+        safe_cast(report.attributed_sales_14_d as STRING) as attributedsales14d,
+        safe_cast(report.attributed_conversions_14_d as STRING)
+            as attributedconversions14d,
+        -- is this the correct brand name?
+        safe_cast(campaigns.id as STRING) as campaignid,
+        safe_cast(campaigns.profile_id as STRING) as profileid,
+        safe_cast(report.cost as STRING) as cost,
+        safe_cast(profile.country_code as STRING) as profilecountrycode
 
 
-		from report
-		left join campaigns
-			on campaigns.id = report.campaign_id and campaigns.is_most_recent_record
-		left join profile
-			on campaigns.profile_id = profile.id
+    from report
+    left join campaigns
+        on report.campaign_id = campaigns.id and campaigns.is_most_recent_record
+    left join profile
+        on campaigns.profile_id = profile.id
 
 
 

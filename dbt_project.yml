@@ -36,4 +36,9 @@ models:
 
 vars:
   amazon_ads_schema: dpl_uk_data_in_dpl_alpha_test_amazon_ads
+  account_currency:
+  campaign_segment_separator:
+  client_account_structure:
+  custom_fields: null
+
 

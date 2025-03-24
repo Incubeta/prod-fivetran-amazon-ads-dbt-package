@@ -1,0 +1,4 @@
+models:
+  - name: base_targeting_report_union_targeting_keyword_report
+    config:
+      event_time: date

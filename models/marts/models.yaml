@@ -1,0 +1,116 @@
+version: 2
+
+models:
+  - name: pub_base__amazon-ad_performance-sponsored_brandcampaign-v1
+    config:
+      alias: amazon-ad_performance-sponsored_brandcampaign-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: pub_base__amazon-ad_performance-sponsored_brandproducts-v1
+    config:
+      alias: amazon-ad_performance-sponsored_brandproducts-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: pub_base__amazon-ad_performance-sponsored_brandtargeting-v1
+    config:
+      alias: amazon-ad_performance-sponsored_brandtargeting-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+
+  - name: pub_base__amazon-ad_performance-sponsored_displaycampaign-v1
+    config:
+      alias: amazon-ad_performance-sponsored_displaycampaign-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: pub_base__amazon-ad_performance-sponsored_displayproducts-v1
+    config:
+      alias: amazon-ad_performance-sponsored_displayproducts-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: pub_base__amazon-ad_performance-sponsored_productcampaign-v1
+    config:
+      alias: amazon-ad_performance-sponsored_productcampaign-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: pub_base__amazon-ad_performance-sponsored_productproducts-v1
+    config:
+      alias: amazon-ad_performance-sponsored_productproducts-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: pub_base__amazon-ad_performance-sponsored_producttargeting-v1
+    config:
+      alias: amazon-ad_performance-sponsored_producttargeting-v1
+      schema: PUB_base
+      materialized: incremental
+      incremental_strategy: microbatch
+      event_time: day 
+      begin: 2025-01-01
+      batch_size: day
+      full_refresh: false
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
