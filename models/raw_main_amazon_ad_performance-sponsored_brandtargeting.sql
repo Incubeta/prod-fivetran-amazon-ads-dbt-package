@@ -1,4 +1,4 @@
-{{ config(enabled=var('amazon_ads__brandtargeting_enabled', True)) }}
+{{ config(enabled=var('amazon_ads__brandtargeting_enabled', True),event_time="date") }}
 {{
 config(
 	alias=var('amazon_ads__sponsored_brandtargeting_alias','amazon-ad_performance-sponsored_brandtargeting-v1' ),

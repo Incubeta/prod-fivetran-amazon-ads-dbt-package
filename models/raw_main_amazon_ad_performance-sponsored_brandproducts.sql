@@ -1,4 +1,4 @@
-{{ config(enabled=var('amazon_ads__brandproducts_enabled', True)) }}
+{{ config(enabled=var('amazon_ads__brandproducts_enabled', True),event_time="date") }}
 {{
 config(
 	alias=var('amazon_ads__sponsored_brandproducts_alias','amazon-ad_performance-sponsored_brandproducts-v1' ),

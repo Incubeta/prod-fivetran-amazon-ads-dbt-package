@@ -1,0 +1,99 @@
+version: 2
+
+models:
+  - name: dpl_legacy_amazon-ad_performance-sponsored_brandproducts-v1
+    config:
+      schema: PUB_base
+      alias: amazon-ad_performance-sponsored_brandproducts-v1
+      materialized: incremental
+      incremental_strategy: microbatch
+      omit_default_schema: true
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: dpl_legacy_amazon-ad_performance-sponsored_brandtargeting-v1
+    config:
+      schema: PUB_base
+      alias: amazon-ad_performance-sponsored_brandtargeting-v1
+      materialized: incremental
+      incremental_strategy: microbatch
+      omit_default_schema: true
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: dpl_legacy_amazon-ad_performance-sponsored_displayproducts-v1
+    config:
+      schema: PUB_base
+      alias: amazon-ad_performance-sponsored_displayproducts-v1
+      materialized: incremental
+      incremental_strategy: microbatch
+      omit_default_schema: true
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: dpl_legacy_amazon-ad_performance-sponsored_displaytargeting-v1
+    config:
+      schema: PUB_base
+      alias: amazon-ad_performance-sponsored_displaytargeting-v1
+      materialized: incremental
+      incremental_strategy: microbatch
+      omit_default_schema: true
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: dpl_legacy_amazon-ad_performance-sponsored_productproducts-v1
+    config:
+      schema: PUB_base
+      alias: amazon-ad_performance-sponsored_productproducts-v1
+      materialized: incremental
+      incremental_strategy: microbatch
+      omit_default_schema: true
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
+  - name: dpl_legacy_amazon-ad_performance-sponsored_producttargeting-v1
+    config:
+      schema: PUB_base
+      alias: amazon-ad_performance-sponsored_producttargeting-v1
+      materialized: incremental
+      incremental_strategy: microbatch
+      omit_default_schema: true
+      full_refresh: false
+      event_time: day
+      batch_size: day
+      begin: 2025-01-01
+      lookback: "{{var('days_ago', 1)}}"
+      partition_by:
+        field: day
+        data_type: date
+        granularity: day
