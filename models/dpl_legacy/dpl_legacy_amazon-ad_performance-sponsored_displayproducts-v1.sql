@@ -46,11 +46,11 @@ SELECT DISTINCT
     SAFE_CAST( attributedConversions14d AS INT64 ) attributed_conversions_14d,
     SAFE_CAST( attributedConversions30dSameSKU AS INT64 ) attributed_conversions_30d_same_sku,
     SAFE_CAST( attributedConversions30d AS INT64 ) attributed_conversions_30d,
-    (SAFE_CAST(cost AS FLOAT64) / source_b.ex_rate) _gbp_cost ,
-    (SAFE_CAST(attributedSales30d AS FLOAT64) / source_b.ex_rate) _gbp_revenue_30d ,
-    (SAFE_CAST(attributedSales14d AS FLOAT64) / source_b.ex_rate) _gbp_revenue_14d ,
-    (SAFE_CAST(attributedSales7d AS FLOAT64) / source_b.ex_rate) _gbp_revenue_7d ,
-    (SAFE_CAST(attributedSales1d AS FLOAT64) / source_b.ex_rate) _gbp_revenue_1d ,
+    (SAFE_CAST(cost AS FLOAT64) / exchange_rates.ex_rate) _gbp_cost ,
+    (SAFE_CAST(attributedSales30d AS FLOAT64) / exchange_rates.ex_rate) _gbp_revenue_30d ,
+    (SAFE_CAST(attributedSales14d AS FLOAT64) / exchange_rates.ex_rate) _gbp_revenue_14d ,
+    (SAFE_CAST(attributedSales7d AS FLOAT64) / exchange_rates.ex_rate) _gbp_revenue_7d ,
+    (SAFE_CAST(attributedSales1d AS FLOAT64) / exchange_rates.ex_rate) _gbp_revenue_1d ,
 
     'amazon-ad_performance-sponsored_displayproducts-v1' AS raw_origin,
     {{ add_fields("campaignName") }} /* Replace with the report's campaign name field */
@@ -61,5 +61,5 @@ left join exchange_rates
 on SAFE_CAST(source_a.date as DATE) = exchange_rates.day
 AND
 
-    LOWER(IFNULL(TRIM(currency),'{{ var('account_currency') }}')) = source_b.currency_code
+    LOWER(IFNULL(TRIM(currency),'{{ var('account_currency') }}')) = exchange_rates.currency_code
 

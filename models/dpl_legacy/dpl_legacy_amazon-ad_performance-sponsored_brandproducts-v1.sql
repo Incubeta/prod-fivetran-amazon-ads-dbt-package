@@ -23,8 +23,8 @@ SELECT DISTINCT
     SAFE_CAST( date AS DATE ) day,
     SAFE_CAST( newToBrandUnitsSold14d AS INT64 ) new_to_brand_units_sold_14d,
 
-    (SAFE_CAST("0" AS FLOAT64) / source_b.ex_rate) _gbp_cost ,
-    (SAFE_CAST(sales14d AS FLOAT64) / source_b.ex_rate) _gbp_revenue , -- using AllRevenue column,
+    (SAFE_CAST("0" AS FLOAT64) / exchange_rates.ex_rate) _gbp_cost ,
+    (SAFE_CAST(sales14d AS FLOAT64) / exchange_rates.ex_rate) _gbp_revenue , -- using AllRevenue column,
     'amazon-ad_performance-sponsored_brandproducts-v1' AS raw_origin,
     {{ add_fields("campaignName") }} /* Replace with the report's campaign name field */
 
@@ -34,5 +34,5 @@ left join exchange_rates
 on SAFE_CAST(source_a.date as DATE) = exchange_rates.day
 AND
 
-    LOWER(IFNULL(TRIM(campaignBudgetCurrencyCode),'{{ var('account_currency') }}')) = source_b.currency_code
+    LOWER(IFNULL(TRIM(campaignBudgetCurrencyCode),'{{ var('account_currency') }}')) = exchange_rates.currency_code
 
