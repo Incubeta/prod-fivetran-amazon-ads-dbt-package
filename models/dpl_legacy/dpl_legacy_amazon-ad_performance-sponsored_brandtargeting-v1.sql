@@ -38,7 +38,6 @@ SELECT DISTINCT
 
 FROM
     {{ref('raw_main_amazon_ad_performance-sponsored_brandtargeting')}} source_a
-LEFT JOIN
 left join exchange_rates
 on SAFE_CAST(source_a.date as DATE) = exchange_rates.day
 AND
