@@ -56,7 +56,7 @@ SELECT DISTINCT
     {{ add_fields("campaignName") }} /* Replace with the report's campaign name field */
 
 FROM
-    {{ref('raw_main_amazon-ad_performance-sponsored_displayproducts')}} source_a
+    {{ref('raw_main_amazon_ad_performance-sponsored_displayproducts')}} source_a
 LEFT JOIN
 left join exchange_rates
 on SAFE_CAST(source_a.date as DATE) = exchange_rates.day
